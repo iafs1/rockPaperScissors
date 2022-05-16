@@ -1,3 +1,8 @@
+let playerScore, computerScore, gameCount;
+computerScore = 0;
+playerScore = 0;
+gameCount = 0;
+
 function computerPlay() {
     randomNumber = Math.floor(Math.random()*3);
     
@@ -35,34 +40,35 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerSelection, computerSelection, playerScore, computerScore;
-    computerScore = 0;
-    playerScore = 0;
-
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Choose rock, paper or scissors: ");
-        computerSelection = computerPlay();
-
-        message = playRound(playerSelection, computerSelection);
-        console.log(message);
-        
-        if (message.includes("Player")) {
-            ++playerScore;
-        }
-        if (message.includes("Computer")) {
-            ++computerScore;
-        }
+function game(playerSelection) {
+    message = playRound(playerSelection, computerPlay());
+    gameCount++;
+    
+    if (message.includes("Player")) {
+        ++playerScore;
+    }
+    if (message.includes("Computer")) {
+        ++computerScore;
     }
 
-    if (playerScore > computerScore) {
+    console.log(`${message} Score: ${playerScore}P, ${computerScore}C. `);
+    
+    if (playerScore === 5) {
         console.log(`Player wins ${playerScore} to ${computerScore}!`);
-    } else if (computerScore > playerScore) {
-        console.log(`Computer wins ${computerScore} to ${playerScore}!`);
-    } else if (computerScore === playerScore) {
-        console.log("It's a tie!");
+        playerScore = 0;
+        computerScore = 0;
+        gameCount = 0;
     }
-
+    if (computerScore === 5) {
+        console.log(`Computer wins ${computerScore} to ${playerScore}!`);
+        playerScore = 0;
+        computerScore = 0;
+        gameCount = 0;
+    }
 }
 
-game();
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => game(`${button.textContent}`));
+});
