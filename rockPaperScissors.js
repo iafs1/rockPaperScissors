@@ -43,27 +43,45 @@ function playRound(playerSelection, computerSelection) {
 function game(playerSelection) {
     message = playRound(playerSelection, computerPlay());
     gameCount++;
+
+    
     
     if (message.includes("Player")) {
         ++playerScore;
+        document.querySelector(".player-score").innerHTML = playerScore;
     }
     if (message.includes("Computer")) {
         ++computerScore;
+        document.querySelector(".computer-score").innerHTML = computerScore;
     }
 
-    console.log(`${message} Score: ${playerScore}P, ${computerScore}C. `);
+    console.log(message);
+    document.querySelector("body").appendChild(document.createTextNode(message));
+    document.querySelector("body").appendChild(document.createElement("br"));
     
     if (playerScore === 5) {
         console.log(`Player wins ${playerScore} to ${computerScore}!`);
+        document.querySelector("body").appendChild(document.createElement("strong"));
+        document.querySelector("body").lastChild.appendChild(document.createTextNode(`Player wins ${playerScore} to ${computerScore}!`));
+        document.querySelector("body").appendChild(document.createElement("br"));
+        document.querySelector("body").appendChild(document.createElement("br"));
         playerScore = 0;
         computerScore = 0;
         gameCount = 0;
+        document.querySelector(".player-score").innerHTML = playerScore;
+        document.querySelector(".computer-score").innerHTML = computerScore;
     }
     if (computerScore === 5) {
         console.log(`Computer wins ${computerScore} to ${playerScore}!`);
+        document.querySelector("body").appendChild(document.createElement("strong"));
+        document.querySelector("body").lastChild.appendChild(document.createTextNode(`Computer wins ${computerScore} to ${playerScore}!`));
+        document.querySelector("body").appendChild(document.createElement("br"));
+        document.querySelector("body").appendChild(document.createElement("br"));
         playerScore = 0;
         computerScore = 0;
         gameCount = 0;
+        document.querySelector(".player-score").innerHTML = playerScore;
+        document.querySelector(".computer-score").innerHTML = computerScore;
     }
 }
 

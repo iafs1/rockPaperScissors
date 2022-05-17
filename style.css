@@ -1,0 +1,10 @@
+.score-text {
+    font-weight: bold;
+    font-size: 32px;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+.player-text, .computer-text {
+    margin: 0px;
+}
